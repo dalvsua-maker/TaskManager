@@ -7,7 +7,8 @@ $(document).ready(function () {
   let editingTaskCompleted = false;
   let editingTaskCreated = null; // Guardamos la fecha de creación original
   let sortDescending = true;
-
+let currentPage = 1;
+const tasksPerPage = 3; // Ajusta este número según el tamaño de tu libreta
  function saveTasks() {
     const tasks = [];
     $("#taskList li").each(function () {
@@ -64,33 +65,34 @@ $(document).ready(function () {
     $(".filter-btn").removeClass("active");
     $(this).addClass("active");
 
-    const filter = $(this).data("filter");
-
-    // 2. Aplicar el filtrado
-    applyFilter(filter);
+       // Refrescar el filtro activo (esto a su vez llamará a la paginación)
+    const activeFilter = $(".filter-btn.active").data("filter") || "all";
+    applyFilter(activeFilter);
 
     console.log("Filtrando por:", filter); // Esto te servirá para ver en consola si clica
   });
 
   // Asegúrate de que la función applyFilter sea exactamente así:
-  function applyFilter(filter) {
-    $("#taskList li").each(function () {
-      const isComp = $(this).hasClass("completed");
-
-      // Usamos .show() y .hide() de jQuery para asegurar la visibilidad
-      if (filter === "all") {
-        $(this).show().removeClass("is-hidden");
-      } else if (filter === "pending") {
-        isComp
-          ? $(this).hide().addClass("is-hidden")
-          : $(this).show().removeClass("is-hidden");
-      } else if (filter === "completed") {
-        isComp
-          ? $(this).show().removeClass("is-hidden")
-          : $(this).hide().addClass("is-hidden");
-      }
+// 1. EL FILTRO: Marca qué tareas son aptas para verse
+function applyFilter(filter) {
+    $("#taskList li").each(function() {
+        const isComp = $(this).hasClass("completed");
+        
+        // En lugar de hide/show, usamos una clase especial de "Filtro"
+        if (filter === "all") {
+            $(this).removeClass("is-hidden-by-filter");
+        } else if (filter === "pending") {
+            isComp ? $(this).addClass("is-hidden-by-filter") : $(this).removeClass("is-hidden-by-filter");
+        } else if (filter === "completed") {
+            isComp ? $(this).removeClass("is-hidden-by-filter") : $(this).addClass("is-hidden-by-filter");
+        }
     });
-  }
+
+    // IMPORTANTE: Cada vez que filtramos, volvemos a la página 1 y recalculamos
+    currentPage = 1;
+    updatePagination(); 
+}
+
 
   function renderTask(
     title,
@@ -235,7 +237,42 @@ $("#taskTitle, #taskDesc, #taskDate").keypress(function (e) {
         $("#addTask").click(); // Ejecuta la función de guardado/actualización
     }
 });
+// 2. LA PAGINACIÓN: Solo reparte en hojas las tareas que pasaron el filtro
+function updatePagination() {
+    // Seleccionamos solo las que NO están ocultas por el filtro
+    const visibleTasks = $("#taskList li").not(".is-hidden-by-filter");
+    
+    const numTotal = visibleTasks.length;
+    const totalPages = Math.ceil(numTotal / tasksPerPage) || 1;
 
+    if (currentPage > totalPages) currentPage = totalPages;
+
+    // Ocultamos ABSOLUTAMENTE TODAS las tareas de la lista (por paginación)
+    $("#taskList li").addClass("is-hidden-by-pagination");
+
+    // De las que pasaron el filtro, mostramos solo el trozo (slice) de esta página
+    const start = (currentPage - 1) * tasksPerPage;
+    const end = start + tasksPerPage;
+    
+    visibleTasks.slice(start, end).removeClass("is-hidden-by-pagination");
+
+    // Actualizar textos y botones
+    $("#pageInfo").text(`Página ${currentPage} de ${totalPages}`);
+    $("#prevPage").prop("disabled", currentPage === 1);
+    $("#nextPage").prop("disabled", currentPage === totalPages);
+    $(".notebook-view").attr("data-page", currentPage);
+}
+
+// Eventos de botones de página
+$(document).on("click", "#nextPage", function() {
+    currentPage++;
+    updatePagination();
+});
+
+$(document).on("click", "#prevPage", function() {
+    currentPage--;
+    updatePagination();
+});
   $("#clearAll").click(function () {
     if (confirm("¿Borrar todo?")) {
       $("#taskList").empty();

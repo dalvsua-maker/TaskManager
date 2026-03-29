@@ -109,7 +109,12 @@ input:focus, textarea:focus { background: white; border-color: var(--primary); }
 .notebook {
   padding: 40px 40px 40px 80px; min-height: 500px; margin: 0; position: relative;
   background-image: linear-gradient(var(--line) 1px, transparent 1px);
-  background-size: 100% 32px; list-style: none;
+  background-size: 100% 32px; list-style: none;    box-shadow: 
+        2px 2px 0 #fff, 
+        4px 4px 0 #e2e8f0, 
+        6px 6px 0 #fff, 
+        8px 8px 0 #e2e8f0,
+        10px 20px 30px rgba(0,0,0,0.05);
 }
 
 .notebook::before {
@@ -130,7 +135,7 @@ input:focus, textarea:focus { background: white; border-color: var(--primary); }
 .task-content strong { display: block; line-height: 32px; font-size: 1.05rem; }
 .task-content p { line-height: 32px; color: var(--text-muted); margin: 0; }
 
-.actions { display: flex; gap: 8px; opacity: 0; transition: 0.2s; }
+
 li:hover .actions { opacity: 1; }
 .btn-icon { padding: 6px; border-radius: 8px; background: #f8fafc; cursor: pointer; }
 .btn-icon svg { width: 18px; height: 18px; }
@@ -155,4 +160,107 @@ input[type="datetime-local"]::-webkit-calendar-picker-indicator {
     padding: 0;
     opacity: 0; /* Lo hace invisible pero clicable */
     cursor: pointer;
+}
+.notebook-footer {
+    padding: 15px 40px 15px 80px;
+    border-top: 1px solid var(--line);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #fcfcfc;
+}
+
+.btn-page {
+    background: var(--bg);
+    border: 1px solid var(--line);
+    padding: 8px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    color: var(--text-muted);
+}
+
+.btn-page:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+#pageInfo {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    font-weight: 600;
+}
+/* Si el filtro la veta, desaparece */
+.is-hidden-by-filter {
+    display: none !important;
+}
+
+/* Si la paginación dice que está en otra hoja, desaparece */
+.is-hidden-by-pagination {
+    display: none !important;
+}
+/* Pestaña decorativa en el lateral del cuaderno */
+.notebook-view::after {
+    content: 'PAG ' attr(data-page);
+    position: absolute;
+    right: -10px;
+    top: 100px;
+    background: var(--primary);
+    color: white;
+    padding: 10px 5px;
+    border-radius: 0 5px 5px 0;
+    font-size: 10px;
+    font-weight: bold;
+    writing-mode: vertical-rl;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+}
+li.completed .task-content strong {
+    position: relative;
+    display: inline-block;
+}
+/* Eliminamos el efecto ::after que causaba el problema */
+li.completed .task-content strong::after {
+    display: none;
+}
+/* Eliminamos el efecto ::after que causaba el problema */
+li.completed .task-content strong::after {
+    display: none;
+}
+@keyframes drawLine {
+    from { width: 0; }
+    to { width: 100%; }
+}
+.task-content strong {
+    display: block;
+    line-height: 32px; /* Alineado con los renglones */
+    font-size: 1.1rem;
+    word-break: break-word; /* Rompe palabras largas si es necesario */
+    padding-right: 40px; /* Deja espacio para que no choque con los botones */
+}
+
+.task-content p {
+    line-height: 32px;
+    margin-top: 0;
+    color: var(--text-muted);
+}
+.notebook li {
+    position: relative; /* Base para posicionar los botones */
+    min-height: 32px;
+    margin-bottom: 32px;
+}
+
+.actions {
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: flex;
+    gap: 8px;
+    background: white; /* Tapa la línea del cuaderno bajo los iconos */
+    padding-left: 10px;
+    opacity: 0;
+    transition: 0.2s;
+}
+
+li:hover .actions {
+    opacity: 1;
 }
