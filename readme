@@ -1,0 +1,7 @@
+PROYECTO: GESTOR DE TAREAS JQUERY (CONTEXTO)
+Layout: 2 columnas (Sidebar 380px / Notebook-view flexible).
+Estética: Cuaderno con renglones de 32px y margen rojo a la izquierda (padding 80px).
+Lógica: Gestión por IDs únicos (Date.now()) y fecha de creación (createdAt) para que al editar no se altere el orden cronológico.
+Funciones: Persistencia en LocalStorage, filtros (Todas/Pendientes/Hechas), barra de progreso dinámica, botón de "Borrar Todo" y ordenación bidireccional.
+Fecha/Hora: Input datetime-local convertido a dd/mm/yy - hh:mm.
+Atajos: Enter para guardar/actualizar; clic en cualquier parte del input abre el calendario.

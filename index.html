@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Gestor de Tareas jQuery</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link href="https://fonts.googleapis.com" rel="stylesheet" />
+    <script src="https://code.jquery.com/jquery-4.0.0.min.js"></script>
+    <script src="js/script.js"></script>
+  </head>
+  <body>
+<div class="container">
+  <div class="main-layout">
+    <!-- COLUMNA IZQUIERDA: Marca y Formulario -->
+    <aside class="sidebar">
+      <header>
+        <h1>Mis Tareas</h1>
+        <p>Organiza tu día de forma eficiente</p>
+      </header>
+
+      <div class="input-card">
+        <div class="field">
+          <label>Título</label>
+          <input type="text" id="taskTitle" placeholder="¿Qué hay que hacer?" />
+        </div>
+        
+        <div class="field">
+          <label>Descripción</label>
+          <textarea id="taskDesc" placeholder="Escribe los detalles aquí..."></textarea>
+        </div>
+  <div class="field">
+    <label>Fecha y Hora</label>
+    <input type="datetime-local" id="taskDate" />
+</div>
+
+      <!-- Busca esto en tu HTML y asegúrate de que estén juntos así -->
+<div class="input-row">
+    <button id="addTask">Guardar Tarea</button>
+    <button id="clearAll">Borrar Todo</button>
+</div>
+
+      </div>
+    </aside>
+
+    <!-- COLUMNA DERECHA: Cuaderno -->
+    <div class="notebook-view">
+    <div class="notebook-header">
+        <!-- Parte superior: Filtros -->
+        <div class="header-top">
+            <div class="filters">
+                <button class="filter-btn active" data-filter="all">Todas</button>
+                <button class="filter-btn" data-filter="pending">Pendientes</button>
+                <button class="filter-btn" data-filter="completed">Hechas</button>
+            </div>
+            <button id="sortTasks" class="btn-text">
+                <span id="sortLabel">Más nuevas</span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="7 15 12 20 17 15"></polyline><polyline points="7 9 12 4 17 9"></polyline></svg>
+            </button>
+        </div>
+        
+        <!-- Parte inferior: Estadísticas -->
+        <div class="header-bottom">
+            <span id="taskCount">0 tareas pendientes</span>
+            <div class="progress-wrapper">
+                <div id="progressBar"></div>
+            </div>
+        </div>
+    </div>
+    <ul id="taskList" class="notebook"></ul>
+</div>
+
+  </div>
+</div>
+
+
+  </body>
+</html>
