@@ -9,10 +9,12 @@
   --notebook-margin: #fca5a5;
 }
 
-body { 
-  font-family: 'Inter', sans-serif; 
-  background-color: var(--bg); 
-  margin: 0; padding: 60px 20px;
+body {
+  font-family: "Inter", sans-serif;
+  background-color: var(--bg);
+  margin: 0;
+  padding: 60px 20px; overflow-x: hidden; 
+   overflow-x: hidden; 
 }
 
 .main-layout {
@@ -25,242 +27,410 @@ body {
 }
 
 /* Sidebar e Inputs */
-header h1 { font-size: 2.5rem; margin: 0; color: var(--text-main); letter-spacing: -1px; }
-header p { color: var(--text-muted); margin: 8px 0 30px; }
+header h1 {
+  font-size: 2.5rem;
+  margin: 0;
+  color: var(--text-main);
+  letter-spacing: -1px;
+}
+header p {
+  color: var(--text-muted);
+  margin: 8px 0 30px;
+}
 
 .input-card {
   background: var(--card-bg);
   padding: 30px;
   border-radius: 24px;
-  box-shadow: 0 20px 25px -5px rgba(0,0,0,0.05);
-  display: flex; flex-direction: column; gap: 20px;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 /* Contenedor principal de los botones */
 .input-row {
-    display: flex !important; /* Fuerza la línea horizontal */
-    flex-direction: row !important; /* Asegura que no se apilen */
-    gap: 15px; /* Espacio entre botones */
-    margin-top: 30px; /* Separación respecto al calendario */
-    width: 100%;
+  display: flex;
+  gap: 10px;
+  margin-top: 30px;
+  width: 100%;
 }
-.field {     position: relative; }
-.field label { font-size: 0.85rem; font-weight: 600; color: var(--text-main); }
-
-input, textarea {
-  background: #f1f5f9; border: 2px solid transparent;
-  border-radius: 12px; padding: 14px; font-family: inherit;
-  width: 100%; box-sizing: border-box; outline: none;
+.field {
+  position: relative;
+}
+.field label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-main);
 }
 
-input:focus, textarea:focus { background: white; border-color: var(--primary); }
-/* Estilo unificado para ambos botones */
-#addTask, #clearAll {
-    flex: 1; /* Hace que ambos midan exactamente lo mismo de ancho */
-    height: 50px; /* Altura fija idéntica para ambos */
-    margin: 0; /* Elimina márgenes que puedan estar moviéndolos */
-    padding: 0;
-    border: none;
-    border-radius: 12px;
-    font-weight: 600;
-    font-size: 0.9rem;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.3s ease;
+input,
+textarea {
+  background: #f1f5f9;
+  border: 2px solid transparent;
+  border-radius: 12px;
+  padding: 14px;
+  font-family: inherit;
+  width: 100%;
+  box-sizing: border-box;
+  outline: none;
+}
+
+input:focus,
+textarea:focus {
+  background: white;
+  border-color: var(--primary);
+}
+/* Base común para los 3 botones */
+#addTask,
+#clearAll,
+#loadDemos {
+  flex: 1; /* Todos miden lo mismo de ancho */
+  height: 48px;
+  border: none;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+/* Colores específicos para Demos */
+#loadDemos {
+  background: #f1f5f9; /* Gris muy suave */
+  color: var(--primary);
+  border: 1px solid var(--line);
+}
+#loadDemos:hover {
+  background: #e2e8f0;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+/* Efecto al pulsar */
+#loadDemos:active {
+  transform: scale(0.95);
 }
 /* Colores específicos */
-#addTask { background: var(--primary); color: white; }
-#addTask:hover { background: var(--primary-hover); transform: translateY(-2px); }
+#addTask {
+  background: var(--primary);
+  color: white;
+}
+#addTask:hover {
+  background: var(--primary-hover);
+  transform: translateY(-2px);
+}
 
-#clearAll { background: #fee2e2; color: #ef4444; }
-#clearAll:hover { background: #fecaca; transform: translateY(-2px); }
+#clearAll {
+  background: #fee2e2;
+  color: #ef4444;
+}
+#clearAll:hover {
+  background: #fecaca;
+  transform: translateY(-2px);
+}
 /* Cuaderno y Header */
-.notebook-view { background: white; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.05); }
+.notebook-view {
+    position: relative;
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    /* CAMBIO VITAL: Debe ser visible para que la pestaña sobresalga */
+    overflow: visible !important; 
+    display: flex;
+    flex-direction: column;
+}
+
+
 
 .notebook-header {
   background: #ffffff;
   padding: 25px 40px 20px 80px; /* ALINEADO CON MARGEN ROJO */
   border-bottom: 1px solid var(--line);
-    position: relative;
-    z-index: 100; /* Asegura que esté por encima de la lista */
+  position: relative;
+  z-index: 100; /* Asegura que esté por encima de la lista */
 }
 
-.header-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
+.header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
 
 /* Filtros Estilo Pastilla */
-.filters { background: #f1f5f9; padding: 4px; border-radius: 10px; display: flex; gap: 4px;  position: relative;
-    z-index: 101;
-    pointer-events: auto; }
-.filter-btn {
-  padding: 6px 14px; font-size: 0.85rem; font-weight: 600;
-  border: none; border-radius: 7px; cursor: pointer; color: var(--text-muted);
-  background: transparent; transition: 0.2s;    cursor: pointer !important;
+.filters {
+  background: #f1f5f9;
+  padding: 4px;
+  border-radius: 10px;
+  display: flex;
+  gap: 4px;
+  position: relative;
+  z-index: 101;
+  pointer-events: auto;
 }
-.filter-btn.active { background: white; color: var(--primary); box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+.filter-btn {
+  padding: 6px 14px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 7px;
+  cursor: pointer;
+  color: var(--text-muted);
+  background: transparent;
+  transition: 0.2s;
+  cursor: pointer !important;
+}
+.filter-btn.active {
+  background: white;
+  color: var(--primary);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
 
 /* Barra de Progreso */
-.header-bottom { display: flex; align-items: center; gap: 15px; }
-#taskCount { font-size: 0.85rem; font-weight: 600; color: var(--text-muted); white-space: nowrap; }
-.progress-wrapper { flex: 1; height: 6px; background: #e2e8f0; border-radius: 10px; overflow: hidden; }
-#progressBar { height: 100%; background: var(--primary); width: 0%; transition: 0.4s; }
+.header-bottom {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+#taskCount {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+.progress-wrapper {
+  flex: 1;
+  height: 6px;
+  background: #e2e8f0;
+  border-radius: 10px;
+  overflow: hidden;
+}
+#progressBar {
+  height: 100%;
+  background: var(--primary);
+  width: 0%;
+  transition: 0.4s;
+}
 
 /* Lista Notebook */
 .notebook {
-  padding: 40px 40px 40px 80px; min-height: 500px; margin: 0; position: relative;
+  padding: 40px 40px 40px 80px;
+  min-height: 500px;
+  margin: 0;
+  position: relative;
   background-image: linear-gradient(var(--line) 1px, transparent 1px);
-  background-size: 100% 32px; list-style: none;    box-shadow: 
-        2px 2px 0 #fff, 
-        4px 4px 0 #e2e8f0, 
-        6px 6px 0 #fff, 
-        8px 8px 0 #e2e8f0,
-        10px 20px 30px rgba(0,0,0,0.05);
+  background-size: 100% 32px;
+  list-style: none;
+  box-shadow:
+    2px 2px 0 #fff,
+    4px 4px 0 #e2e8f0,
+    6px 6px 0 #fff,
+    8px 8px 0 #e2e8f0,
+    10px 20px 30px rgba(0, 0, 0, 0.05);
 }
 
 .notebook::before {
-  content: ''; position: absolute; top: 0; bottom: 0; left: 60px;
-  width: 2px; background: var(--notebook-margin); opacity: 0.5;
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 60px;
+  width: 2px;
+  background: var(--notebook-margin);
+  opacity: 0.5;
 }
 
 .notebook li {
-  min-height: 32px; margin-bottom: 32px; display: flex;
-  justify-content: space-between; align-items: flex-start;
+  min-height: 32px;
+  margin-bottom: 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
   transition: opacity 0.2s;
 }
 
 /* Lógica de filtrado visual */
-.notebook li.is-hidden { display: none !important; }
+.notebook li.is-hidden {
+  display: none !important;
+}
 
-.task-content { flex: 1; cursor: pointer; user-select: none; }
-.task-content strong { display: block; line-height: 32px; font-size: 1.05rem; }
-.task-content p { line-height: 32px; color: var(--text-muted); margin: 0; }
+.task-content {
+  flex: 1;
+  cursor: pointer;
+  user-select: none;
+}
+.task-content strong {
+  display: block;
+  line-height: 32px;
+  font-size: 1.05rem;
+}
+.task-content p {
+  line-height: 32px;
+  color: var(--text-muted);
+  margin: 0;
+}
 
+li:hover .actions {
+  opacity: 1;
+}
+.btn-icon {
+  padding: 6px;
+  border-radius: 8px;
+  background: #f8fafc;
+  cursor: pointer;
+}
+.btn-icon svg {
+  width: 18px;
+  height: 18px;
+}
 
-li:hover .actions { opacity: 1; }
-.btn-icon { padding: 6px; border-radius: 8px; background: #f8fafc; cursor: pointer; }
-.btn-icon svg { width: 18px; height: 18px; }
+li.completed {
+  opacity: 0.5;
+}
+li.completed .task-content {
+  text-decoration: line-through;
+}
 
-li.completed { opacity: 0.5; }
-li.completed .task-content { text-decoration: line-through; }
-
-.btn-text { background: none; border: none; cursor: pointer; color: var(--text-muted); display: flex; align-items: center; gap: 5px; font-weight: 600; }
+.btn-text {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-weight: 600;
+}
 /* Esto expande el área clicable para fecha y hora */
 /* Limitamos el área invisible solo al input de fecha */
 input[type="datetime-local"] {
-    position: relative;
-    cursor: pointer;
+  position: relative;
+  cursor: pointer;
 }
 input[type="datetime-local"]::-webkit-calendar-picker-indicator {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    opacity: 0; /* Lo hace invisible pero clicable */
-    cursor: pointer;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  opacity: 0; /* Lo hace invisible pero clicable */
+  cursor: pointer;
 }
 .notebook-footer {
-    padding: 15px 40px 15px 80px;
+    background: #fcfcfc;
+    /* 80px a la izquierda para dejar espacio al "espiral" y margen rojo */
+    padding: 15px 40px 15px 80px; 
     border-top: 1px solid var(--line);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: #fcfcfc;
+    border-radius: 0 0 16px 16px;
 }
 
+
+
 .btn-page {
-    background: var(--bg);
-    border: 1px solid var(--line);
-    padding: 8px 16px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: 600;
-    color: var(--text-muted);
+  background: var(--bg);
+  border: 1px solid var(--line);
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--text-muted);
 }
 
 .btn-page:disabled {
-    opacity: 0.4;
-    cursor: not-allowed;
+  opacity: 0.4;
+  cursor: not-allowed;
 }
 
 #pageInfo {
-    font-size: 0.85rem;
-    color: var(--text-muted);
-    font-weight: 600;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  font-weight: 600;
 }
 /* Si el filtro la veta, desaparece */
 .is-hidden-by-filter {
-    display: none !important;
+  display: none !important;
 }
 
 /* Si la paginación dice que está en otra hoja, desaparece */
 .is-hidden-by-pagination {
-    display: none !important;
+  display: none !important;
 }
 /* Pestaña decorativa en el lateral del cuaderno */
 .notebook-view::after {
     content: 'PAG ' attr(data-page);
     position: absolute;
-    right: -10px;
+    right: -12px; /* La sacamos 12 píxeles hacia afuera */
     top: 100px;
     background: var(--primary);
     color: white;
-    padding: 10px 5px;
-    border-radius: 0 5px 5px 0;
+    padding: 12px 6px;
+    border-radius: 0 8px 8px 0;
+    writing-mode: vertical-rl;
     font-size: 10px;
     font-weight: bold;
-    writing-mode: vertical-rl;
-    box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+    z-index: 100;
 }
+
+
+
 li.completed .task-content strong {
-    position: relative;
-    display: inline-block;
+  position: relative;
+  display: inline-block;
 }
 /* Eliminamos el efecto ::after que causaba el problema */
 li.completed .task-content strong::after {
-    display: none;
+  display: none;
 }
 /* Eliminamos el efecto ::after que causaba el problema */
 li.completed .task-content strong::after {
-    display: none;
+  display: none;
 }
 @keyframes drawLine {
-    from { width: 0; }
-    to { width: 100%; }
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
 }
 .task-content strong {
-    display: block;
-    line-height: 32px; /* Alineado con los renglones */
-    font-size: 1.1rem;
-    word-break: break-word; /* Rompe palabras largas si es necesario */
-    padding-right: 40px; /* Deja espacio para que no choque con los botones */
+  display: block;
+  line-height: 32px; /* Alineado con los renglones */
+  font-size: 1.1rem;
+  word-break: break-word; /* Rompe palabras largas si es necesario */
+  padding-right: 40px; /* Deja espacio para que no choque con los botones */
 }
 
 .task-content p {
-    line-height: 32px;
-    margin-top: 0;
-    color: var(--text-muted);
+  line-height: 32px;
+  margin-top: 0;
+  color: var(--text-muted);
 }
 .notebook li {
-    position: relative; /* Base para posicionar los botones */
-    min-height: 32px;
-    margin-bottom: 32px;
+  position: relative; /* Base para posicionar los botones */
+  min-height: 32px;
+  margin-bottom: 32px;
 }
 
 .actions {
-    position: absolute;
-    top: 0;
-    right: 0;
-    display: flex;
-    gap: 8px;
-    background: white; /* Tapa la línea del cuaderno bajo los iconos */
-    padding-left: 10px;
-    opacity: 0;
-    transition: 0.2s;
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: flex;
+  gap: 8px;
+  background: white; /* Tapa la línea del cuaderno bajo los iconos */
+  padding-left: 10px;
+  opacity: 0;
+  transition: 0.2s;
 }
 
 li:hover .actions {
-    opacity: 1;
+  opacity: 1;
 }

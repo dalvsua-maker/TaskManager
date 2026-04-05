@@ -262,6 +262,25 @@ function updatePagination() {
     $("#nextPage").prop("disabled", currentPage === totalPages);
     $(".notebook-view").attr("data-page", currentPage);
 }
+$("#loadDemos").click(function() {
+    const demos = [
+        { t: "Comprar suministros", d: "Papel, tinta y grapas.", dt: "2026-04-10T10:00", c: true },
+        { t: "Tarea muy larga de prueba", d: "Este texto ocupa varios renglones del cuaderno para verificar el tachado.", dt: "2026-04-11T12:00", c: false },
+        { t: "Gimnasio", d: "Día de pierna.", dt: "", c: true },
+        { t: "Enviar informe", d: "Revisar los KPIs antes de mandar el PDF.", dt: "2026-04-15T09:00", c: false },
+        { t: "Reparar la bici", d: "Ajustar frenos.", dt: "", c: false }
+    ];
+
+    demos.forEach((task, index) => {
+        // Usamos un pequeño desfase en el tiempo para que mantengan orden cronológico
+        const id = Date.now() + index;
+        renderTask(task.t, task.d, task.dt, task.c, id, id);
+    });
+
+    updateCounter();
+    saveTasks();
+});
+
 
 // Eventos de botones de página
 $(document).on("click", "#nextPage", function() {
