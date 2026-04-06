@@ -39,13 +39,23 @@ header p {
 }
 
 .input-card {
-  background: var(--card-bg);
-  padding: 30px;
-  border-radius: 24px;
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05);
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
+    background: var(--card-bg);
+    padding: 30px;
+    border-radius: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    
+    /* EL ANCLA: Siempre tiene un borde de 2px sólido */
+    /* En modo claro, el borde es del mismo color que el fondo para que no se vea */
+    border: 2px solid var(--card-bg) !important; 
+    box-sizing: border-box !important;
+    
+    /* Sombra consistente */
+    box-shadow: 0 20px 25px -5px rgba(0,0,0,0.05);
+    
+    /* Solo animamos el color, NUNCA el tamaño ni el borde */
+    transition: background-color 0.3s, border-color 0.3s; 
 }
 /* Contenedor principal de los botones */
 .input-row {
@@ -84,9 +94,10 @@ textarea:focus {
 #addTask,
 #clearAll,
 #loadDemos {
-  flex: 1; /* Todos miden lo mismo de ancho */
+  flex: 1;
   height: 48px;
-  border: none;
+  border: 1px solid transparent; /* Borde siempre presente para modelo de caja consistente */
+  box-sizing: border-box;
   border-radius: 12px;
   font-weight: 600;
   font-size: 0.85rem;
@@ -135,11 +146,17 @@ textarea:focus {
     position: relative;
     background: white;
     border-radius: 16px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-    /* CAMBIO VITAL: Debe ser visible para que la pestaña sobresalga */
-    overflow: visible !important; 
+    overflow: visible !important;
     display: flex;
     flex-direction: column;
+    transition: background-color 0.3s;
+    /* Sombras modo claro */
+    box-shadow: 
+        2px 2px 0 #fff, 
+        3px 3px 0 var(--line), 
+        5px 5px 0 #fff, 
+        6px 6px 0 var(--line),
+        10px 20px 30px rgba(0,0,0,0.05);
 }
 
 
@@ -223,12 +240,6 @@ textarea:focus {
   background-image: linear-gradient(var(--line) 1px, transparent 1px);
   background-size: 100% 32px;
   list-style: none;
-  box-shadow:
-    2px 2px 0 #fff,
-    4px 4px 0 #e2e8f0,
-    6px 6px 0 #fff,
-    8px 8px 0 #e2e8f0,
-    10px 20px 30px rgba(0, 0, 0, 0.05);
 }
 
 .notebook::before {
@@ -433,4 +444,146 @@ li.completed .task-content strong::after {
 
 li:hover .actions {
   opacity: 1;
+}
+/* --- VARIABLES DARK MODE --- */
+body.dark {
+    --bg: #0f172a;
+    --card-bg: #1e293b;
+    --text-main: #f1f5f9;
+    --text-muted: #94a3b8;
+    --line: #334155;
+    --notebook-margin: #7f1d1d;
+    --input-bg: #0f172a;
+}
+
+/* --- ADAPTACIÓN DE COMPONENTES --- */
+body.dark .input-card {
+    background-color: var(--card-bg) !important;
+    /* El borde ahora se ve, pero mide los mismos 2px de antes */
+    border-color: var(--line) !important; 
+    
+    /* Mantenemos una sombra del mismo tamaño pero más oscura */
+    box-shadow: 0 20px 25px -5px rgba(0,0,0,0.3) !important;
+}
+body.dark .notebook-view, 
+body.dark .notebook-header, 
+body.dark .notebook-footer,
+body.dark .notebook {
+    background-color: var(--card-bg) !important;
+    color: var(--text-main);
+    border-color: var(--line) !important;
+}
+
+body.dark input, 
+body.dark textarea {
+    background-color: var(--input-bg);
+    color: var(--text-main);
+    border: 1px solid var(--line);
+}
+
+/* Los botones "Borrar Todo" y "Demos" deben oscurecerse */
+body.dark #clearAll, 
+body.dark #loadDemos {
+    background-color: #334155;
+    color: #fca5a5; /* Un rojo más suave para el texto */
+   
+}
+
+body.dark .btn-icon { background: #334155; }
+body.dark .filters { background: #0f172a; }
+body.dark .filter-btn.active { background: var(--primary); color: white; }
+
+/* Estilo del Botón Toggle y SVGs */
+.dark-mode-toggle button {
+    background: none; border: none; cursor: pointer; color: var(--text-muted);
+}
+.dark-mode-toggle svg { width: 24px; height: 24px; transition: 0.3s; }
+.dark-mode-toggle button:hover { color: var(--primary); }
+
+body.dark .icon-sun { display: block; }
+body.dark .icon-moon { display: none; }
+body:not(.dark) .icon-sun { display: none; }
+body:not(.dark) .icon-moon { display: block; }
+/* Esto arregla el borde derecho y las hojas de debajo */
+/* Esto mata las líneas blancas del borde y las hojas de debajo */
+body.dark .notebook-view,
+body.dark .notebook,
+body.dark .notebook-header,
+body.dark .notebook-footer {
+    background-color: var(--card-bg) !important;
+    border-color: var(--line) !important;
+    box-shadow: none !important; /* Eliminamos el efecto de hojas blancas en dark mode */
+}
+
+/* Si quieres que siga habiendo volumen, usa sombras oscuras */
+body.dark .notebook-view {
+ background-color: var(--card-bg) !important;
+    box-shadow: 
+        2px 2px 0 var(--card-bg), 
+        3px 3px 0 var(--line), 
+        5px 5px 0 var(--card-bg), 
+        6px 6px 0 var(--line),
+        10px 20px 40px rgba(0,0,0,0.4) !important;
+}
+
+body.dark .btn-icon {
+    background-color: #334155 !important; /* Gris azulado oscuro */
+    border: 1px solid var(--line);
+}
+
+body.dark .btn-icon:hover {
+    background-color: #475569 !important;
+}
+
+/* Aseguramos que los iconos SVG cambien de color si es necesario */
+body.dark .btn-icon svg {
+    opacity: 0.9;
+}
+
+/* El contenedor de botones (actions) suele tener un fondo para tapar la línea, 
+   hay que hacerlo oscuro también */
+body.dark .actions {
+    background-color: var(--card-bg) !important;
+}
+body.dark .btn-page {
+    background-color: #0f172a !important;
+    color: var(--text-main) !important;
+    border: 1px solid var(--line) !important;
+}
+
+body.dark .btn-page:hover:not(:disabled) {
+    background-color: var(--primary) !important;
+    color: white !important;
+}
+/* --- ESTILO BASE PARA INPUTS Y TEXTAREA --- */
+input, textarea {
+    /* El SEGURO: El borde y el padding se cuentan DENTRO del ancho */
+    box-sizing: border-box !important;
+    width: 100% !important;
+    
+    /* Siempre tienen un borde de 2px sólido */
+    /* En modo claro, el borde es del mismo color que el fondo para que sea invisible */
+    border: 2px solid #f1f5f9 !important; 
+    
+    background: #f1f5f9;
+    border-radius: 12px;
+    padding: 14px;
+    font-family: inherit;
+    outline: none;
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+/* --- MODO OSCURO (Los inputs ya no empujan nada) --- */
+body.dark input, 
+body.dark textarea {
+    background-color: #0f172a !important;
+    /* El borde cambia de color, pero ya existía con 2px antes */
+    border-color: var(--line) !important; 
+    color: var(--text-main);
+}
+
+/* Ocultar o estilizar el tirador del textarea para que no moleste */
+textarea {
+    resize: vertical; /* Solo permitir estirar hacia abajo, no a los lados */
+    min-height: 120px;
 }

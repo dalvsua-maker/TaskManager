@@ -387,6 +387,24 @@ $(document).ready(function () {
       saveTasks();
     }
   });
+$(document).ready(function() {
+    // 1. Comprobar si ya estaba activado en LocalStorage
+    if (localStorage.getItem("theme") === "dark") {
+        $("body").addClass("dark");
+    }
+
+    // 2. Evento de clic en el botón
+    $("#toggleDark").click(function() {
+        $("body").toggleClass("dark");
+        
+        // Guardar la preferencia
+        if ($("body").hasClass("dark")) {
+            localStorage.setItem("theme", "dark");
+        } else {
+            localStorage.setItem("theme", "light");
+        }
+    });
+});
 
 
   // --- INICIO ---
