@@ -26,7 +26,7 @@ body {
   align-items: start;
 }
 
-/* Sidebar e Inputs */
+
 header h1 {
   font-size: 2.5rem;
   margin: 0;
@@ -46,18 +46,18 @@ header p {
     flex-direction: column;
     gap: 20px;
     
-    /* EL ANCLA: Siempre tiene un borde de 2px sólido */
-    /* En modo claro, el borde es del mismo color que el fondo para que no se vea */
+    
+    
     border: 2px solid var(--card-bg) !important; 
     box-sizing: border-box !important;
     
-    /* Sombra consistente */
+    
     box-shadow: 0 20px 25px -5px rgba(0,0,0,0.05);
     
-    /* Solo animamos el color, NUNCA el tamaño ni el borde */
+    
     transition: background-color 0.3s, border-color 0.3s; 
 }
-/* Contenedor principal de los botones */
+
 .input-row {
   display: flex;
   gap: 10px;
@@ -90,13 +90,13 @@ textarea:focus {
   background: white;
   border-color: var(--primary);
 }
-/* Base común para los 3 botones */
+
 #addTask,
 #clearAll,
 #loadDemos {
   flex: 1;
   height: 48px;
-  border: 1px solid transparent; /* Borde siempre presente para modelo de caja consistente */
+  border: 1px solid transparent; 
   box-sizing: border-box;
   border-radius: 12px;
   font-weight: 600;
@@ -107,9 +107,9 @@ textarea:focus {
   align-items: center;
   justify-content: center;
 }
-/* Colores específicos para Demos */
+
 #loadDemos {
-  background: #f1f5f9; /* Gris muy suave */
+  background: #f1f5f9; 
   color: var(--primary);
   border: 1px solid var(--line);
 }
@@ -119,11 +119,11 @@ textarea:focus {
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
 }
 
-/* Efecto al pulsar */
+
 #loadDemos:active {
   transform: scale(0.95);
 }
-/* Colores específicos */
+
 #addTask {
   background: var(--primary);
   color: white;
@@ -141,7 +141,7 @@ textarea:focus {
   background: #fecaca;
   transform: translateY(-2px);
 }
-/* Cuaderno y Header */
+
 .notebook-view {
     position: relative;
     background: white;
@@ -150,7 +150,7 @@ textarea:focus {
     display: flex;
     flex-direction: column;
     transition: background-color 0.3s;
-    /* Sombras modo claro */
+    
     box-shadow: 
         2px 2px 0 #fff, 
         3px 3px 0 var(--line), 
@@ -163,10 +163,10 @@ textarea:focus {
 
 .notebook-header {
   background: #ffffff;
-  padding: 25px 40px 20px 80px; /* ALINEADO CON MARGEN ROJO */
+  padding: 25px 40px 20px 80px; 
   border-bottom: 1px solid var(--line);
   position: relative;
-  z-index: 100; /* Asegura que esté por encima de la lista */
+  z-index: 100; 
 }
 
 .header-top {
@@ -176,7 +176,7 @@ textarea:focus {
   margin-bottom: 15px;
 }
 
-/* Filtros Estilo Pastilla */
+
 .filters {
   background: #f1f5f9;
   padding: 4px;
@@ -205,7 +205,7 @@ textarea:focus {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
-/* Barra de Progreso */
+
 .header-bottom {
   display: flex;
   align-items: center;
@@ -231,7 +231,7 @@ textarea:focus {
   transition: 0.4s;
 }
 
-/* Lista Notebook */
+
 .notebook {
   padding: 40px 40px 40px 80px;
   min-height: 500px;
@@ -262,7 +262,7 @@ textarea:focus {
   transition: opacity 0.2s;
 }
 
-/* Lógica de filtrado visual */
+
 .notebook li.is-hidden {
   display: none !important;
 }
@@ -314,8 +314,8 @@ li.completed .task-content {
   gap: 5px;
   font-weight: 600;
 }
-/* Esto expande el área clicable para fecha y hora */
-/* Limitamos el área invisible solo al input de fecha */
+
+
 input[type="datetime-local"] {
   position: relative;
   cursor: pointer;
@@ -328,12 +328,12 @@ input[type="datetime-local"]::-webkit-calendar-picker-indicator {
   height: 100%;
   margin: 0;
   padding: 0;
-  opacity: 0; /* Lo hace invisible pero clicable */
+  opacity: 0; 
   cursor: pointer;
 }
 .notebook-footer {
     background: #fcfcfc;
-    /* 80px a la izquierda para dejar espacio al "espiral" y margen rojo */
+    
     padding: 15px 40px 15px 80px; 
     border-top: 1px solid var(--line);
     display: flex;
@@ -364,20 +364,20 @@ input[type="datetime-local"]::-webkit-calendar-picker-indicator {
   color: var(--text-muted);
   font-weight: 600;
 }
-/* Si el filtro la veta, desaparece */
+
 .is-hidden-by-filter {
   display: none !important;
 }
 
-/* Si la paginación dice que está en otra hoja, desaparece */
+
 .is-hidden-by-pagination {
   display: none !important;
 }
-/* Pestaña decorativa en el lateral del cuaderno */
+
 .notebook-view::after {
     content: 'PAG ' attr(data-page);
     position: absolute;
-    right: -12px; /* La sacamos 12 píxeles hacia afuera */
+    right: -12px; 
     top: 100px;
     background: var(--primary);
     color: white;
@@ -395,11 +395,11 @@ li.completed .task-content strong {
   position: relative;
   display: inline-block;
 }
-/* Eliminamos el efecto ::after que causaba el problema */
+
 li.completed .task-content strong::after {
   display: none;
 }
-/* Eliminamos el efecto ::after que causaba el problema */
+
 li.completed .task-content strong::after {
   display: none;
 }
@@ -413,10 +413,10 @@ li.completed .task-content strong::after {
 }
 .task-content strong {
   display: block;
-  line-height: 32px; /* Alineado con los renglones */
+  line-height: 32px; 
   font-size: 1.1rem;
-  word-break: break-word; /* Rompe palabras largas si es necesario */
-  padding-right: 40px; /* Deja espacio para que no choque con los botones */
+  word-break: break-word; 
+  padding-right: 40px; 
 }
 
 .task-content p {
@@ -425,7 +425,7 @@ li.completed .task-content strong::after {
   color: var(--text-muted);
 }
 .notebook li {
-  position: relative; /* Base para posicionar los botones */
+  position: relative; 
   min-height: 32px;
   margin-bottom: 32px;
 }
@@ -436,7 +436,7 @@ li.completed .task-content strong::after {
   right: 0;
   display: flex;
   gap: 8px;
-  background: white; /* Tapa la línea del cuaderno bajo los iconos */
+  background: white; 
   padding-left: 10px;
   opacity: 0;
   transition: 0.2s;
@@ -445,7 +445,7 @@ li.completed .task-content strong::after {
 li:hover .actions {
   opacity: 1;
 }
-/* --- VARIABLES DARK MODE --- */
+
 body.dark {
     --bg: #0f172a;
     --card-bg: #1e293b;
@@ -456,13 +456,13 @@ body.dark {
     --input-bg: #0f172a;
 }
 
-/* --- ADAPTACIÓN DE COMPONENTES --- */
+
 body.dark .input-card {
     background-color: var(--card-bg) !important;
-    /* El borde ahora se ve, pero mide los mismos 2px de antes */
+    
     border-color: var(--line) !important; 
     
-    /* Mantenemos una sombra del mismo tamaño pero más oscura */
+    
     box-shadow: 0 20px 25px -5px rgba(0,0,0,0.3) !important;
 }
 body.dark .notebook-view, 
@@ -481,11 +481,11 @@ body.dark textarea {
     border: 1px solid var(--line);
 }
 
-/* Los botones "Borrar Todo" y "Demos" deben oscurecerse */
+
 body.dark #clearAll, 
 body.dark #loadDemos {
     background-color: #334155;
-    color: #fca5a5; /* Un rojo más suave para el texto */
+    color: #fca5a5; 
    
 }
 
@@ -493,7 +493,7 @@ body.dark .btn-icon { background: #334155; }
 body.dark .filters { background: #0f172a; }
 body.dark .filter-btn.active { background: var(--primary); color: white; }
 
-/* Estilo del Botón Toggle y SVGs */
+
 .dark-mode-toggle button {
     background: none; border: none; cursor: pointer; color: var(--text-muted);
 }
@@ -504,18 +504,18 @@ body.dark .icon-sun { display: block; }
 body.dark .icon-moon { display: none; }
 body:not(.dark) .icon-sun { display: none; }
 body:not(.dark) .icon-moon { display: block; }
-/* Esto arregla el borde derecho y las hojas de debajo */
-/* Esto mata las líneas blancas del borde y las hojas de debajo */
+
+
 body.dark .notebook-view,
 body.dark .notebook,
 body.dark .notebook-header,
 body.dark .notebook-footer {
     background-color: var(--card-bg) !important;
     border-color: var(--line) !important;
-    box-shadow: none !important; /* Eliminamos el efecto de hojas blancas en dark mode */
+    box-shadow: none !important; 
 }
 
-/* Si quieres que siga habiendo volumen, usa sombras oscuras */
+
 body.dark .notebook-view {
  background-color: var(--card-bg) !important;
     box-shadow: 
@@ -527,7 +527,7 @@ body.dark .notebook-view {
 }
 
 body.dark .btn-icon {
-    background-color: #334155 !important; /* Gris azulado oscuro */
+    background-color: #334155 !important; 
     border: 1px solid var(--line);
 }
 
@@ -535,7 +535,7 @@ body.dark .btn-icon:hover {
     background-color: #475569 !important;
 }
 
-/* Aseguramos que los iconos SVG cambien de color si es necesario */
+
 body.dark .btn-icon svg {
     opacity: 0.9;
 }
@@ -555,14 +555,14 @@ body.dark .btn-page:hover:not(:disabled) {
     background-color: var(--primary) !important;
     color: white !important;
 }
-/* --- ESTILO BASE PARA INPUTS Y TEXTAREA --- */
+
 input, textarea {
-    /* El SEGURO: El borde y el padding se cuentan DENTRO del ancho */
+    
     box-sizing: border-box !important;
     width: 100% !important;
     
-    /* Siempre tienen un borde de 2px sólido */
-    /* En modo claro, el borde es del mismo color que el fondo para que sea invisible */
+    
+    
     border: 2px solid #f1f5f9 !important; 
     
     background: #f1f5f9;
@@ -573,17 +573,17 @@ input, textarea {
     transition: background-color 0.3s, border-color 0.3s;
 }
 
-/* --- MODO OSCURO (Los inputs ya no empujan nada) --- */
+
 body.dark input, 
 body.dark textarea {
     background-color: #0f172a !important;
-    /* El borde cambia de color, pero ya existía con 2px antes */
+    
     border-color: var(--line) !important; 
     color: var(--text-main);
 }
 
-/* Ocultar o estilizar el tirador del textarea para que no moleste */
+
 textarea {
-    resize: vertical; /* Solo permitir estirar hacia abajo, no a los lados */
+    resize: vertical; 
     min-height: 120px;
 }
