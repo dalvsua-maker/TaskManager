@@ -1,3 +1,9 @@
+/* =============================================================================
+   VARIABLES GLOBALES (Custom Properties)
+   =============================================================================
+   Definimos la paleta de colores base. Estas variables permiten que el modo 
+   oscuro funcione simplemente cambiando sus valores más adelante.
+   ============================================================================= */
 :root {
   --primary: #4f46e5;
   --primary-hover: #4338ca;
@@ -9,14 +15,23 @@
   --notebook-margin: #fca5a5;
 }
 
+/* ---------------------------------------------------------------------------
+   ESTILOS BASE DEL DOCUMENTO
+   --------------------------------------------------------------------------- */
 body {
   font-family: "Inter", sans-serif;
   background-color: var(--bg);
   margin: 0;
-  padding: 60px 20px; overflow-x: hidden; 
-   overflow-x: hidden; 
+  padding: 60px 20px;
+  overflow-x: hidden;
 }
 
+/* ---------------------------------------------------------------------------
+   ESTRUCTURA DE COLUMNAS (GRID)
+   ---------------------------------------------------------------------------
+   Define la separación entre la barra lateral del formulario (380px) 
+   y el área del cuaderno (flexible).
+   --------------------------------------------------------------------------- */
 .main-layout {
   display: grid;
   grid-template-columns: 380px 1fr;
@@ -25,7 +40,6 @@ body {
   margin: 0 auto;
   align-items: start;
 }
-
 
 header h1 {
   font-size: 2.5rem;
@@ -38,24 +52,25 @@ header p {
   margin: 8px 0 30px;
 }
 
+/* ---------------------------------------------------------------------------
+   FORMULARIO DE ENTRADA (SIDEBAR)
+   --------------------------------------------------------------------------- */
 .input-card {
-    background: var(--card-bg);
-    padding: 30px;
-    border-radius: 24px;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    
-    
-    
-    border: 2px solid var(--card-bg) !important; 
-    box-sizing: border-box !important;
-    
-    
-    box-shadow: 0 20px 25px -5px rgba(0,0,0,0.05);
-    
-    
-    transition: background-color 0.3s, border-color 0.3s; 
+  background: var(--card-bg);
+  padding: 30px;
+  border-radius: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  border: 2px solid var(--card-bg) !important;
+  box-sizing: border-box !important;
+
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05);
+
+  transition:
+    background-color 0.3s,
+    border-color 0.3s;
 }
 
 .input-row {
@@ -73,6 +88,7 @@ header p {
   color: var(--text-main);
 }
 
+/* Estilos para los campos de texto */
 input,
 textarea {
   background: #f1f5f9;
@@ -91,12 +107,15 @@ textarea:focus {
   border-color: var(--primary);
 }
 
+/* ---------------------------------------------------------------------------
+   BOTONES DE ACCIÓN
+   --------------------------------------------------------------------------- */
 #addTask,
 #clearAll,
 #loadDemos {
   flex: 1;
   height: 48px;
-  border: 1px solid transparent; 
+  border: 1px solid transparent;
   box-sizing: border-box;
   border-radius: 12px;
   font-weight: 600;
@@ -109,7 +128,7 @@ textarea:focus {
 }
 
 #loadDemos {
-  background: #f1f5f9; 
+  background: #f1f5f9;
   color: var(--primary);
   border: 1px solid var(--line);
 }
@@ -118,7 +137,6 @@ textarea:focus {
   transform: translateY(-2px);
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
 }
-
 
 #loadDemos:active {
   transform: scale(0.95);
@@ -142,31 +160,35 @@ textarea:focus {
   transform: translateY(-2px);
 }
 
+/* ---------------------------------------------------------------------------
+   VISTA DEL CUADERNO (ZONA DERECHA)
+   ---------------------------------------------------------------------------
+   Se encarga de crear el efecto visual de las hojas apiladas mediante sombras.
+   --------------------------------------------------------------------------- */
 .notebook-view {
-    position: relative;
-    background: white;
-    border-radius: 16px;
-    overflow: visible !important;
-    display: flex;
-    flex-direction: column;
-    transition: background-color 0.3s;
-    
-    box-shadow: 
-        2px 2px 0 #fff, 
-        3px 3px 0 var(--line), 
-        5px 5px 0 #fff, 
-        6px 6px 0 var(--line),
-        10px 20px 30px rgba(0,0,0,0.05);
+  position: relative;
+  background: white;
+  border-radius: 16px;
+  overflow: visible !important;
+  display: flex;
+  flex-direction: column;
+  transition: background-color 0.3s;
+
+  box-shadow:
+    2px 2px 0 #fff,
+    3px 3px 0 var(--line),
+    5px 5px 0 #fff,
+    6px 6px 0 var(--line),
+    10px 20px 30px rgba(0, 0, 0, 0.05);
 }
 
-
-
+/* Cabecera interna del cuaderno */
 .notebook-header {
   background: #ffffff;
-  padding: 25px 40px 20px 80px; 
+  padding: 25px 40px 20px 80px;
   border-bottom: 1px solid var(--line);
   position: relative;
-  z-index: 100; 
+  z-index: 100;
 }
 
 .header-top {
@@ -176,7 +198,9 @@ textarea:focus {
   margin-bottom: 15px;
 }
 
-
+/* ---------------------------------------------------------------------------
+   FILTROS Y BARRA DE PROGRESO
+   --------------------------------------------------------------------------- */
 .filters {
   background: #f1f5f9;
   padding: 4px;
@@ -205,7 +229,6 @@ textarea:focus {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
-
 .header-bottom {
   display: flex;
   align-items: center;
@@ -231,7 +254,11 @@ textarea:focus {
   transition: 0.4s;
 }
 
-
+/* ---------------------------------------------------------------------------
+   EL PAPEL (LISTA DE TAREAS)
+   ---------------------------------------------------------------------------
+   Crea las líneas azules horizontales y la línea de margen roja.
+   --------------------------------------------------------------------------- */
 .notebook {
   padding: 40px 40px 40px 80px;
   min-height: 500px;
@@ -262,7 +289,6 @@ textarea:focus {
   transition: opacity 0.2s;
 }
 
-
 .notebook li.is-hidden {
   display: none !important;
 }
@@ -283,6 +309,7 @@ textarea:focus {
   margin: 0;
 }
 
+/* Botones de edición/borrado de cada tarea */
 li:hover .actions {
   opacity: 1;
 }
@@ -297,6 +324,7 @@ li:hover .actions {
   height: 18px;
 }
 
+/* Tareas completadas */
 li.completed {
   opacity: 0.5;
 }
@@ -315,7 +343,9 @@ li.completed .task-content {
   font-weight: 600;
 }
 
-
+/* ---------------------------------------------------------------------------
+   SELECTOR DE FECHA
+   --------------------------------------------------------------------------- */
 input[type="datetime-local"] {
   position: relative;
   cursor: pointer;
@@ -328,21 +358,23 @@ input[type="datetime-local"]::-webkit-calendar-picker-indicator {
   height: 100%;
   margin: 0;
   padding: 0;
-  opacity: 0; 
+  opacity: 0;
   cursor: pointer;
 }
+
+/* ---------------------------------------------------------------------------
+   FOOTER Y PAGINACIÓN
+   --------------------------------------------------------------------------- */
 .notebook-footer {
-    background: #fcfcfc;
-    
-    padding: 15px 40px 15px 80px; 
-    border-top: 1px solid var(--line);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-radius: 0 0 16px 16px;
+  background: #fcfcfc;
+
+  padding: 15px 40px 15px 80px;
+  border-top: 1px solid var(--line);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 0 0 16px 16px;
 }
-
-
 
 .btn-page {
   background: var(--bg);
@@ -365,31 +397,30 @@ input[type="datetime-local"]::-webkit-calendar-picker-indicator {
   font-weight: 600;
 }
 
+/* Clases de utilidad para filtros y páginas */
 .is-hidden-by-filter {
   display: none !important;
 }
-
 
 .is-hidden-by-pagination {
   display: none !important;
 }
 
+/* Pestaña lateral que indica el número de página */
 .notebook-view::after {
-    content: 'PAG ' attr(data-page);
-    position: absolute;
-    right: -12px; 
-    top: 100px;
-    background: var(--primary);
-    color: white;
-    padding: 12px 6px;
-    border-radius: 0 8px 8px 0;
-    writing-mode: vertical-rl;
-    font-size: 10px;
-    font-weight: bold;
-    z-index: 100;
+  content: "PAG " attr(data-page);
+  position: absolute;
+  right: -12px;
+  top: 100px;
+  background: var(--primary);
+  color: white;
+  padding: 12px 6px;
+  border-radius: 0 8px 8px 0;
+  writing-mode: vertical-rl;
+  font-size: 10px;
+  font-weight: bold;
+  z-index: 100;
 }
-
-
 
 li.completed .task-content strong {
   position: relative;
@@ -411,12 +442,16 @@ li.completed .task-content strong::after {
     width: 100%;
   }
 }
+
+/* ---------------------------------------------------------------------------
+   AJUSTES DE TEXTO Y ACCIONES
+   --------------------------------------------------------------------------- */
 .task-content strong {
   display: block;
-  line-height: 32px; 
+  line-height: 32px;
   font-size: 1.1rem;
-  word-break: break-word; 
-  padding-right: 40px; 
+  word-break: break-word;
+  padding-right: 40px;
 }
 
 .task-content p {
@@ -425,7 +460,7 @@ li.completed .task-content strong::after {
   color: var(--text-muted);
 }
 .notebook li {
-  position: relative; 
+  position: relative;
   min-height: 32px;
   margin-bottom: 32px;
 }
@@ -436,7 +471,7 @@ li.completed .task-content strong::after {
   right: 0;
   display: flex;
   gap: 8px;
-  background: white; 
+  background: white;
   padding-left: 10px;
   opacity: 0;
   transition: 0.2s;
@@ -446,144 +481,167 @@ li:hover .actions {
   opacity: 1;
 }
 
+/* ---------------------------------------------------------------------------
+   MODO OSCURO (THEME DARK)
+   ---------------------------------------------------------------------------
+   Redefinimos las variables y ajustamos los colores de fondo de los componentes.
+   --------------------------------------------------------------------------- */
 body.dark {
-    --bg: #0f172a;
-    --card-bg: #1e293b;
-    --text-main: #f1f5f9;
-    --text-muted: #94a3b8;
-    --line: #334155;
-    --notebook-margin: #7f1d1d;
-    --input-bg: #0f172a;
+  --bg: #0f172a;
+  --card-bg: #1e293b;
+  --text-main: #f1f5f9;
+  --text-muted: #94a3b8;
+  --line: #334155;
+  --notebook-margin: #7f1d1d;
+  --input-bg: #0f172a;
 }
-
 
 body.dark .input-card {
-    background-color: var(--card-bg) !important;
-    
-    border-color: var(--line) !important; 
-    
-    
-    box-shadow: 0 20px 25px -5px rgba(0,0,0,0.3) !important;
+  background-color: var(--card-bg) !important;
+
+  border-color: var(--line) !important;
+
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3) !important;
 }
-body.dark .notebook-view, 
-body.dark .notebook-header, 
+body.dark .notebook-view,
+body.dark .notebook-header,
 body.dark .notebook-footer,
 body.dark .notebook {
-    background-color: var(--card-bg) !important;
-    color: var(--text-main);
-    border-color: var(--line) !important;
+  background-color: var(--card-bg) !important;
+  color: var(--text-main);
+  border-color: var(--line) !important;
 }
 
-body.dark input, 
+body.dark input,
 body.dark textarea {
-    background-color: var(--input-bg);
-    color: var(--text-main);
-    border: 1px solid var(--line);
+  background-color: var(--input-bg);
+  color: var(--text-main);
+  border: 1px solid var(--line);
 }
 
-
-body.dark #clearAll, 
+body.dark #clearAll,
 body.dark #loadDemos {
-    background-color: #334155;
-    color: #fca5a5; 
-   
+  background-color: #334155;
+  color: #fca5a5;
 }
 
-body.dark .btn-icon { background: #334155; }
-body.dark .filters { background: #0f172a; }
-body.dark .filter-btn.active { background: var(--primary); color: white; }
+body.dark .btn-icon {
+  background: #334155;
+}
+body.dark .filters {
+  background: #0f172a;
+}
+body.dark .filter-btn.active {
+  background: var(--primary);
+  color: white;
+}
 
-
+/* Interruptor de Modo Oscuro */
 .dark-mode-toggle button {
-    background: none; border: none; cursor: pointer; color: var(--text-muted);
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text-muted);
 }
-.dark-mode-toggle svg { width: 24px; height: 24px; transition: 0.3s; }
-.dark-mode-toggle button:hover { color: var(--primary); }
+.dark-mode-toggle svg {
+  width: 24px;
+  height: 24px;
+  transition: 0.3s;
+}
+.dark-mode-toggle button:hover {
+  color: var(--primary);
+}
 
-body.dark .icon-sun { display: block; }
-body.dark .icon-moon { display: none; }
-body:not(.dark) .icon-sun { display: none; }
-body:not(.dark) .icon-moon { display: block; }
+/* Lógica de visibilidad de iconos Sol/Luna */
+body.dark .icon-sun {
+  display: block;
+}
+body.dark .icon-moon {
+  display: none;
+}
+body:not(.dark) .icon-sun {
+  display: none;
+}
+body:not(.dark) .icon-moon {
+  display: block;
+}
 
-
+/* Ajustes finales de componentes en Modo Oscuro */
 body.dark .notebook-view,
 body.dark .notebook,
 body.dark .notebook-header,
 body.dark .notebook-footer {
-    background-color: var(--card-bg) !important;
-    border-color: var(--line) !important;
-    box-shadow: none !important; 
+  background-color: var(--card-bg) !important;
+  border-color: var(--line) !important;
+  box-shadow: none !important;
 }
 
-
 body.dark .notebook-view {
- background-color: var(--card-bg) !important;
-    box-shadow: 
-        2px 2px 0 var(--card-bg), 
-        3px 3px 0 var(--line), 
-        5px 5px 0 var(--card-bg), 
-        6px 6px 0 var(--line),
-        10px 20px 40px rgba(0,0,0,0.4) !important;
+  background-color: var(--card-bg) !important;
+  box-shadow:
+    2px 2px 0 var(--card-bg),
+    3px 3px 0 var(--line),
+    5px 5px 0 var(--card-bg),
+    6px 6px 0 var(--line),
+    10px 20px 40px rgba(0, 0, 0, 0.4) !important;
 }
 
 body.dark .btn-icon {
-    background-color: #334155 !important; 
-    border: 1px solid var(--line);
+  background-color: #334155 !important;
+  border: 1px solid var(--line);
 }
 
 body.dark .btn-icon:hover {
-    background-color: #475569 !important;
+  background-color: #475569 !important;
 }
-
 
 body.dark .btn-icon svg {
-    opacity: 0.9;
+  opacity: 0.9;
 }
 
-/* El contenedor de botones (actions) suele tener un fondo para tapar la línea, 
-   hay que hacerlo oscuro también */
 body.dark .actions {
-    background-color: var(--card-bg) !important;
+  background-color: var(--card-bg) !important;
 }
 body.dark .btn-page {
-    background-color: #0f172a !important;
-    color: var(--text-main) !important;
-    border: 1px solid var(--line) !important;
+  background-color: #0f172a !important;
+  color: var(--text-main) !important;
+  border: 1px solid var(--line) !important;
 }
 
 body.dark .btn-page:hover:not(:disabled) {
-    background-color: var(--primary) !important;
-    color: white !important;
+  background-color: var(--primary) !important;
+  color: white !important;
 }
 
-input, textarea {
-    
-    box-sizing: border-box !important;
-    width: 100% !important;
-    
-    
-    
-    border: 2px solid #f1f5f9 !important; 
-    
-    background: #f1f5f9;
-    border-radius: 12px;
-    padding: 14px;
-    font-family: inherit;
-    outline: none;
-    transition: background-color 0.3s, border-color 0.3s;
+/* ---------------------------------------------------------------------------
+   ESTILOS FINALES Y CORRECCIONES DE INPUTS
+   --------------------------------------------------------------------------- */
+input,
+textarea {
+  box-sizing: border-box !important;
+  width: 100% !important;
+
+  border: 2px solid #f1f5f9 !important;
+
+  background: #f1f5f9;
+  border-radius: 12px;
+  padding: 14px;
+  font-family: inherit;
+  outline: none;
+  transition:
+    background-color 0.3s,
+    border-color 0.3s;
 }
 
-
-body.dark input, 
+body.dark input,
 body.dark textarea {
-    background-color: #0f172a !important;
-    
-    border-color: var(--line) !important; 
-    color: var(--text-main);
-}
+  background-color: #0f172a !important;
 
+  border-color: var(--line) !important;
+  color: var(--text-main);
+}
 
 textarea {
-    resize: vertical; 
-    min-height: 120px;
+  resize: vertical;
+  min-height: 120px;
 }
